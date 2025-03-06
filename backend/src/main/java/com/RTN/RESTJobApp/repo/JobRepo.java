@@ -76,11 +76,11 @@ public class JobRepo {
         return jobs.isEmpty()?null:jobs.get(0);
     }
 
-    public JobPost updateJob(JobPost jobPost) {
+    public JobPost updateJob(int id) {
 
         String usql="update jobs set postProfile=?,postDesc=?,reqExperience=?,postTechStack=? where postId=?";
         String techstack=new Gson().toJson(jobPost.getPostTechStack());
-        int rows=jdbc.update(usql,jobPost.getPostProfile(),jobPost.getPostDesc(),jobPost.getReqExperience(),techstack,jobPost.getPostId());
+        int rows=jdbc.update(usql,jobPost.getPostProfile(),jobPost.getPostDesc(),jobPost.getReqExperience(),techstack,id);
         System.out.println(rows+"Updated Successfully");
 
         return getJob(jobPost.getPostId());
